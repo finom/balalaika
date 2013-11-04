@@ -1,4 +1,4 @@
-balalaika.js 0.0.1-alpha
+Balalaika.js 0.0.1-alpha
 =========
-## the tiny DOM library
+## The tiny DOM library
 Coming soon
