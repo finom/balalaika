@@ -8,7 +8,7 @@
 		for( i = 1; i < args[ s_length ]; i++ ) {
 			var arg = args[ i ];
 			if ( arg ) for ( i in arg ) {
-				obj[ prop ] = arg[ prop ];
+				obj[ i ] = arg[ i ];
 			}
 		}
 	},
@@ -17,7 +17,7 @@
 	id = 0,
 	events = {},
 	i,
-	$ = window.$ = function( s ) {
+	$ = window.balalaika = window.$ = function( s ) {
 		return new $[ s_prototype ].init( s );
 	},
 	fn = $.fn = $[ s_prototype ] = arr;
@@ -46,10 +46,9 @@
 			}
 			return _this;
 		},
-		on: function( n,f ) {
-			var n = n.split( nsReg ),
-				evtName = n[ 0 ];
-	
+		on: function( n, f ) {
+			n = n.split( nsReg );
+			var evtName = n[ 0 ];
 			return this[ s_forEach ]( function( item ) {
 				var _id = item[ expando ] = item[ expando ] || ++id,
 					eventObject = events[ _id ] = events[ _id ] || {},
@@ -61,7 +60,7 @@
 					type: evtName
 				});
 				
-				item[ 'add' + s_EventListener ]( n, f );
+				item[ 'add' + s_EventListener ]( evtName, f );
 			});
 		},
 		off: function( n, f ) {
@@ -70,11 +69,13 @@
 				ns = n[ 1 ];
 			this[ s_forEach ]( function( item ) {
 				var _id = item[ expando ],
-					eventArray;
-				if( ns || f ) {
+					eventArray, h;
+				if( ns || !f ) {
 					for( eventArray = events[ _id ] && events[ _id ][ evtName ], i = 0; eventArray && i < eventArray[ s_length ]; i++ ) {
-						if( ( !f || f === eventArray[ i ].handler ) && ( !ns || ns === eventArray[ i ].namespace ) ) {
-							item[ 'remove' + s_EventListener ]( evtName, eventArray[ i ].handler );
+						h = eventArray[ i ].handler;
+						console.log( events )
+						if( ( !f || f === h ) && ( !ns || ns === eventArray[ i ].namespace ) ) {
+							item[ 'remove' + s_EventListener ]( evtName, h );
 							eventArray.splice( i--, 1 );
 						}
 					}
@@ -89,4 +90,4 @@
 			return this;
 		}
 	});
-})( this, document, 'prototype', 'length', 'EventListener', 'call', 'forEach', 'push', 'apply' );
+})( this, document, [], 'prototype', 'length', 'EventListener', 'call', 'forEach', 'push', 'apply' );
