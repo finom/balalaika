@@ -104,20 +104,26 @@ Yep. The idea is if you need something implement it! A lot of jQuery-like functi
 $.fn.hasClass = function( className ) {
 	return !!this[ 0 ] && this[ 0 ][ s_classList ].contains( className );
 };
+```
+```js
 $.fn.addClass = function( className ) {
 	this.forEach( function( item ) {
 		var classList = item[ s_classList ];
 		classList.add.apply( classList, className.split( /\s/ ) );
 	});
 	return this;
-},
+};
+```
+```js
 $.fn.removeClass = function( className ) {
 	this.forEach( function( item ) {
 		var classList = item[ s_classList ];
 		classList.remove.apply( classList, className.split( /\s/ ) );
 	});
 	return this;
-},
+};
+```
+```js
 $.fn.toggleClass = function( className, b ) {
 	this.forEach( function( item ) {
 		var classList = item[ s_classList ];
@@ -128,8 +134,8 @@ $.fn.toggleClass = function( className, b ) {
 	});
 	return this;
 };
-// and so on
 ```
+And so on...
 
 ### More examples
 #### Adding styles for elements
