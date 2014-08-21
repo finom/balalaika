@@ -1,4 +1,4 @@
-( function( window, document, fn, nsRegAndEvents, id, s_EventListener, s_MatchesSelector, i, j, k, l, $ ) {
+window.$ = ( function( window, document, fn, nsRegAndEvents, id, s_EventListener, s_MatchesSelector, i, j, k, l, $ ) {
 	$ = function( s, context ) {
 		return new $.i( s, context );
 	};
