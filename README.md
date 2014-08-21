@@ -160,5 +160,27 @@ $('.my-selector').on('click', function(evt) {
 	}
 });
 ```
-
+#### ``$.fn.parents`` plugin
+```js
+$.fn.parents = function(selector) {
+	var collection = $();
+	this.forEach(function(node) {
+		var parent;
+		while((node = node.parentNode) && (node !== document)) {
+			if(selector) {
+				if($(node).is(selector)) {
+					parent = node;
+				}
+			} else {
+				parent = node;
+			}
+			if(parent && !~collection.indexOf(parent)) {
+				collection.push(parent);
+			}
+		}
+	});
+	
+	return collection;
+};
+```
 Licensed by WTFPL
