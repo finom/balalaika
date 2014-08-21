@@ -1,93 +1,75 @@
-"use strict";
-(function( window, document, arr, s_prototype, s_length, s_EventListener, s_call, s_forEach, s_push, s_apply ) { // http://jsbin.com/eqiCAKO/2
-	var slice = function( a, i ) {
-		return arr.slice[s_call]( a, i );
-	},
-	extend = function( obj ) {
-		var args = arguments;
-		for( i = 1; i < args[ s_length ]; i++ ) {
-			var arg = args[ i ];
-			if ( arg ) for ( i in arg ) {
-				obj[ i ] = arg[ i ];
-			}
-		}
-	},
-	nsReg = /\.(.+)?/,
-	expando = 'b' + Math.random(),
-	id = 0,
-	events = {},
-	i,
-	$ = window.balalaika = window.$ = function( s ) {
-		return new $[ s_prototype ].init( s );
-	},
-	fn = $.fn = $[ s_prototype ] = arr;
-	fn.init = function( s ) {
-		arr[s_push][s_apply](this, s && s.nodeType ? [s] : "" + s === s ? slice(document.querySelectorAll(s)) : /^f/.test(typeof s) ? $(document).r(s) : null);
+( function( window, document, fn, nsRegAndEvents, id, s_EventListener, s_MatchesSelector, i, j, k, l, $ ) {
+	$ = function( s, context ) {
+		return new $.i( s, context );
 	};
-	fn.init[ s_prototype ] = fn;
-	extend( $, {
-		extend: extend
-	});
-	extend( fn, {
-		extend: function() {
-			var args = slice( arguments );
-			args.unshift( this );
-			return extend[s_apply]( 0, args );
-		},
-		each: arr[ s_forEach ],
-		add: function( s ) {
-			var _this = this;
-			s = $( s );
-			arr[s_push][s_apply]( _this, s );
-			for( i = _this[s_length] - s[s_length]; i < _this[s_length]; i++ ) {
-				if( _this.indexOf( _this[ i ] ) !== i ) {
-					_this.splice( i--, 1 );
+	
+	$.i = function( s, context ) {
+		fn.push.apply( this, !s ? fn : s.nodeType || s == window ? [s] : "" + s === s ? /</.test( s ) 
+		? ( ( i = document.createElement( context || 'div' ) ).innerHTML = s, i.children ) : (context&&$(context)[0]||document).querySelectorAll(s) : /f/.test(typeof s) ? /c/.test(document.readyState) ? s() : $(document).on('DOMContentLoaded', s) : s );
+	};
+	
+	$.i[ l = 'prototype' ] = ( $.extend = function(obj) {
+		k = arguments;
+		for( i = 1; i < k.length; i++ ) {
+			if ( l = k[ i ] ) {
+				for (j in l) {
+					obj[j] = l[j];
 				}
 			}
-			return _this;
-		},
+		}
+		
+		return obj;
+	})( $.fn = $[ l ] = fn, { // $.fn = $.prototype = fn
 		on: function( n, f ) {
-			n = n.split( nsReg );
-			var evtName = n[ 0 ];
-			return this[ s_forEach ]( function( item ) {
-				var _id = item[ expando ] = item[ expando ] || ++id,
-					eventObject = events[ _id ] = events[ _id ] || {},
-					eventArray = eventObject[ evtName ] = eventObject[ evtName ] || [];
-					
-				eventArray[s_push]({
-					handler: f,
-					namespace: n[ 1 ],
-					type: evtName
-				});
-				
-				item[ 'add' + s_EventListener ]( evtName, f );
+			// n = [ eventName, nameSpace ]
+			n = n.split( nsRegAndEvents );
+			this.map( function( item ) {
+				// item.b$ is balalaika_id for an element
+				// i is eventName + id ("click75")
+				// nsRegAndEvents[ i ] is array of events (eg all click events for element#75) ([[namespace, handler], [namespace, handler]])
+				( nsRegAndEvents[ i = n[ 0 ] + ( item.b$ = item.b$ || ++id ) ] = nsRegAndEvents[ i ] || [] ).push([f, n[ 1 ]]);
+				// item.addEventListener( eventName, f )
+				item[ 'add' + s_EventListener ]( n[ 0 ], f );
 			});
+			return this;
 		},
 		off: function( n, f ) {
-			n = n.split( nsReg );
-			var evtName = n[ 0 ],
-				ns = n[ 1 ];
-			this[ s_forEach ]( function( item ) {
-				var _id = item[ expando ],
-					eventArray, h;
-				if( ns || !f ) {
-					for( eventArray = events[ _id ] && events[ _id ][ evtName ], i = 0; eventArray && i < eventArray[ s_length ]; i++ ) {
-						h = eventArray[ i ].handler;
-						console.log( events )
-						if( ( !f || f === h ) && ( !ns || ns === eventArray[ i ].namespace ) ) {
-							item[ 'remove' + s_EventListener ]( evtName, h );
-							eventArray.splice( i--, 1 );
+			// n = [ eventName, nameSpace ]
+			n = n.split( nsRegAndEvents );
+			// l = 'removeEventListener'
+			l = 'remove' + s_EventListener;
+			this.map( function( item ) {
+				// k - array of events
+				// item.b$ - balalaika_id for an element
+				// n[ 0 ] + item.b$ - eventName + id ("click75")
+				k = nsRegAndEvents[ n[ 0 ] + item.b$ ];
+				// if array of events exist then i = length of array of events
+				if( i = k && k.length ) {
+					// while j = one of array of events
+					while( j = k[ --i ] ) {
+						// if( no f and no namespace || f but no namespace || no f but namespace || f and namespace )
+						if( ( !f || f == j[ 0 ] ) && ( !n[ 1 ] || n[ 1 ] == j[ 1 ] ) ) {
+							// item.removeEventListener( eventName, handler );
+							item[ l ]( n[ 0 ], j[ 0 ] );
+							// remove event from array of events
+							k.splice( i, 1 );
 						}
 					}
 				} else {
-					item[ 'remove' + s_EventListener ]( evtName, f );
-				}
+					// if event added before using addEventListener, just remove it using item.removeEventListener( eventName, f )
+					!n[ 1 ] && item[ l ]( n[ 0 ], f );
+				}	
 			});
-		},
-
-		r: function (f) {
-			/c/.test(document.readyState) ? f() : $(document).on('DOMContentLoaded', f);
 			return this;
+		},
+		is: function( s ) {
+			i = this[ 0 ];
+			j = !!i && ( i.matches
+				|| i[ 'webkit' + s_MatchesSelector ]
+				|| i[ 'moz' + s_MatchesSelector ]
+				|| i[ 'ms' + s_MatchesSelector ] );
+			return !!j && j.call( i, s );
 		}
-	});
-})( this, document, [], 'prototype', 'length', 'EventListener', 'call', 'forEach', 'push', 'apply' );
+	});	
+	return $;
+})( window, document, [], /\.(.+)/, 0, 'EventListener', 'MatchesSelector' )
