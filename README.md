@@ -63,3 +63,81 @@ $('.my-selector').forEach(function(el) {
 			<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map" target="_blank">map</a></li>
 			<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some" target="_blank">some</a></li>
 		</ul>
+
+Besides, Balalaika has few additional methods such as:
+#### ``on``
+```js
+$('.my-selector').on('click.namespace', function() {
+	alert('I need my balalaika');
+});
+```
+#### ``off``
+```js
+$('.my-selector').off('click.namespace');
+```
+#### ``is``
+```js
+$('.my-selector').on('click', function(evt) {
+	if($(evt.target).is('.another-selector')) {
+		alert('I need my balalaika');
+	}
+});
+```
+#### ``extend``
+```js
+var myObject = {a:1};
+$.extend(myObject,{
+	b: 2
+});
+```
+#### ``DOM ready feature``
+```js
+$(function() {
+	// Do something with DOM
+});
+```
+
+### It provides very few functions, doesn't it?
+Yep. The idea is if you need something implement it! A lot of jQuery-like functions can be created easily. Use jQuery.fn style to create additional methods:
+```js
+$.fn.hasClass = function( className ) {
+	return !!this[ 0 ] && this[ 0 ][ s_classList ].contains( className );
+};
+$.fn.addClass = function( className ) {
+	this.forEach( function( item ) {
+		var classList = item[ s_classList ];
+		classList.add.apply( classList, className.split( /\s/ ) );
+	});
+	return this;
+},
+$.fn.removeClass = function( className ) {
+	this.forEach( function( item ) {
+		var classList = item[ s_classList ];
+		classList.remove.apply( classList, className.split( /\s/ ) );
+	});
+	return this;
+},
+$.fn.toggleClass = function( className, b ) {
+	this.forEach( function( item ) {
+		var classList = item[ s_classList ];
+		if( typeof b !== 'boolean' ) {
+			b = !classList.contains( className );
+		}
+		classList[ b ? 'add' : 'remove' ].apply( classList, className.split( /\s/ ) );
+	});
+	return this;
+};
+// and so on
+```
+
+### More examples
+#### Adding styles for elements
+```js
+$('.my-selector').forEach(function(el) {
+	$.extend( el, {
+		width: '30px',
+		backgroundColor: 'red'
+	});
+});
+```
+#### Delegated events
