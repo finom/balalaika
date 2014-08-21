@@ -141,3 +141,17 @@ $('.my-selector').forEach(function(el) {
 });
 ```
 #### Delegated events
+```js
+$('.my-selector').on('click', function(evt) {
+	var node = evt.target;
+	while(node !== this) {
+		if($(node).is('.delegated-selector')) {
+			// Handle it!
+			break;
+		}
+		node = node.parentNode;
+	}
+});
+```
+
+Licensed by WTFPL
