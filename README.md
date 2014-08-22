@@ -194,7 +194,7 @@ var myElements = $.parseHTML('<tr><td></td></tr>');
 #### Adding styles for elements
 ```js
 $('.my-selector').forEach(function(el) {
-	$.extend( el, {
+	$.extend( el.style, {
 		width: '30px',
 		backgroundColor: 'red'
 	});
