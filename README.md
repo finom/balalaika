@@ -236,4 +236,4 @@ $.fn.parents = function(selector) {
 	return collection;
 };
 ```
-**Licensed under WTFPL**
+**Licensed under MIT License**
