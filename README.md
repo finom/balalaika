@@ -1,6 +1,6 @@
 Balalaika.js
 =========
-## The tiny DOM library (990 bytes!)
+## The tiny DOM library (990 bytes uncompressed!)
 Balalaika provides you tiny replacement for huge DOM libraries such as jQuery and Zepto. It contains few methods which should be sufficient for vanilla.js developers.
 
 ### Where I can use it?
