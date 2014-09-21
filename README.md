@@ -25,7 +25,7 @@ Then use it anywhere on this web page:
 
 The second kind of use is inside single script as local variable:
 ```js
-(function(win, $) {alert(win)
+(function(win, $) {
 	// your code starts here
 	$(function() {
 		$('.my-selector').on('click', function() {
