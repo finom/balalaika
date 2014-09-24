@@ -5,7 +5,7 @@ window.$ = ( function( window, document, fn, nsRegAndEvents, id, s_EventListener
 	
 	$.i = function( s, context ) {
 		fn.push.apply( this, !s ? fn : s.nodeType || s == window ? [s] : "" + s === s ? /</.test( s ) 
-		? ( ( i = document.createElement( context || 'div' ) ).innerHTML = s, i.children ) : (context&&$(context)[0]||document).querySelectorAll(s) : /f/.test(typeof s) ? /c/.test(document.readyState) ? s() : $(document).on('DOMContentLoaded', s) : s );
+		? ( ( i = document.createElement( context || 'q' ) ).innerHTML = s, i.children ) : (context&&$(context)[0]||document).querySelectorAll(s) : /f/.test(typeof s) ? /c/.test(document.readyState) ? s() : $(document).on('DOMContentLoaded', s) : s );
 	};
 	
 	$.i[ l = 'prototype' ] = ( $.extend = function(obj) {
