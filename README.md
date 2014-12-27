@@ -99,7 +99,7 @@ $(function() {
 ```
 
 ### It provides very few functions, doesn't it?
-Yep. The idea is if you need something, implement it! A lot of jQuery-like functions can be created easily. Use jQuery.fn style to create additional methods:
+Yep. The idea is if you need something, implement it! A lot of jQuery-like functions can be created easily. Use $.fn style to create additional methods:
 ```js
 $.fn.hasClass = function( className ) {
 	return !!this[ 0 ] && this[ 0 ].classList.contains( className );
