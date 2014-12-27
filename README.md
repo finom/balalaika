@@ -23,7 +23,7 @@ Then use it anywhere on the web page:
 </script>
 ```
 
-The second kind of use is inside single script as local variable:
+The second kind of use is using it inside single script as local variable:
 ```js
 (function(win, $) {
 	// your code starts here
