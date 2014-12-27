@@ -12,7 +12,7 @@ $=function(n,e,k,h,p,m,l,b,d,g,f,c){c=function(a,b){return new c.i(a,b)};c.i=fun
 ```
 (Looks like Google Analytics embed)
 
-Then use it anywhere on this web page:
+Then use it anywhere on the web page:
 ```html
 <script>
 	$(function() {
