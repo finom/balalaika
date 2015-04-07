@@ -1,6 +1,8 @@
 Balalaika.js
 =========
 ## The tiny DOM library (987 bytes uncompressed and 605 bytes gzipped!)
+
+[![Join the chat at https://gitter.im/finom/balalaika](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/finom/balalaika?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Balalaika provides you tiny replacement for huge DOM libraries such as jQuery and Zepto. It contains few methods which should be sufficient for vanilla.js developers.
 
 ### How can I use it?
