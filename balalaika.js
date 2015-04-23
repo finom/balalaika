@@ -64,11 +64,10 @@ window.$ = ( function( window, document, fn, nsRegAndEvents, id, s_EventListener
 		},
 		is: function( s ) {
 			i = this[ 0 ];
-			j = i.matches
+			return (i.matches
 				|| i[ 'webkit' + s_MatchesSelector ]
 				|| i[ 'moz' + s_MatchesSelector ]
-				|| i[ 'ms' + s_MatchesSelector ];
-			return j.call( i, s );
+				|| i[ 'ms' + s_MatchesSelector ]).call( i, s );
 		}
 	});	
 	return $;
