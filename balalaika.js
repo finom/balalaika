@@ -67,7 +67,8 @@ window.$ = ( function( window, document, fn, nsRegAndEvents, id, s_EventListener
 			return (i.matches
 				|| i[ 'webkit' + s_MatchesSelector ]
 				|| i[ 'moz' + s_MatchesSelector ]
-				|| i[ 'ms' + s_MatchesSelector ]).call( i, s );
+				|| i[ 'ms' + s_MatchesSelector ]
+				|| i[ 'o' + s_MatchesSelector ]).call( i, s );
 		}
 	});	
 	return $;
