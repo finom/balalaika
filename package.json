@@ -1,8 +1,8 @@
 {
   "name": "balalaika",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tiny DOM library",
-  "main": "balalaika.js",
+  "main": "balalaika.umd.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
